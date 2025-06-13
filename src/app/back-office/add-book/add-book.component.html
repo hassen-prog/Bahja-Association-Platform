@@ -1,0 +1,230 @@
+<div class="book-form">
+  <mat-card>
+    <mat-card-content>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            [(ngModel)]="bookTitle"
+            placeholder="Title"
+            name="title"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Author</mat-label>
+          <input
+            matInput
+            [(ngModel)]="bookAuthor"
+            placeholder="Author"
+            name="author"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="bookDescription"
+            placeholder="Description"
+            name="description"
+          ></textarea>
+        </mat-form-field>
+
+        <input
+          type="file"
+          id="fileInput"
+          (change)="onFileSelected($event)"
+          style="margin-top: 20px"
+        />
+        <label for="pdfInput">Upload PDF:</label>
+        <input
+          type="file"
+          id="pdfInput"
+          accept="application/pdf"
+          (change)="onFileSelectedPdf($event)"
+        />
+        <button mat-raised-button color="primary" (click)="addBook()">
+          Add Book
+        </button>
+      </form>
+
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="container mt-4">
+  <div class="section-title mb-4">
+    <h2>Manage Our Books</h2>
+    <p>
+      Administer our collection of books. Update, delete or add new resources as
+      needed.
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of books">
+                <td>
+                  <img
+                    [src]="book.coverImageUrl"
+                    alt="{{ book.title }}"
+                    style="width: 100px; height: auto; border-radius: 5px"
+                  />
+                </td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.description | slice : 0 : 100 }}...</td>
+                <td>
+                  <!-- In your table in the HTML file -->
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="openEditModal(book)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    (click)="deleteBook(book.id)"
+                    class="btn btn-danger btn-sm"
+                  >
+                    Delete
+                  </button>
+
+                  <!-- <button class="btn btn-primary btn-sm" (click)="editBook(book)">Edit</button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteBook(book)">Delete</button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- src/app/add-book/add-book.component.html -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="editBookModal" tabindex="-1" role="dialog" aria-labelledby="editBookModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editBookModalLabel">Edit Book</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="bookTitle">Title</label>
+            <input type="text" class="form-control" id="bookTitle" [(ngModel)]="selectedBook.title" name="title">
+          </div>
+          <div class="form-group">
+            <label for="bookAuthor">Author</label>
+            <input type="text" class="form-control" id="bookAuthor" [(ngModel)]="selectedBook.author" name="author">
+          </div>
+          <div class="form-group">
+            <label for="bookDescription">Description</label>
+            <textarea class="form-control" id="bookDescription" [(ngModel)]="selectedBook.description"
+              name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fileInput">Cover Image</label>
+            <input type="file" class="form-control-file" id="fileInput" (change)="onFileSelected($event)">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateBook()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div
+  class="modal fade show"
+  *ngIf="isModalOpen"
+  tabindex="-1"
+  role="dialog"
+  style="display: block; background: rgba(0, 0, 0, 0.5)"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Book</h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="bookTitle">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bookTitle"
+              [(ngModel)]="selectedBook.title"
+              name="title"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookAuthor">Author</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bookAuthor"
+              [(ngModel)]="selectedBook.author"
+              name="author"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookDescription">Description</label>
+            <textarea
+              class="form-control"
+              id="bookDescription"
+              [(ngModel)]="selectedBook.description"
+              name="description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="fileInput">Cover Image</label>
+            <input
+              type="file"
+              class="form-control-file"
+              id="fileInput"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateBook()">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

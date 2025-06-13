@@ -1,0 +1,50 @@
+<div class="card" style="width: 1143px;">
+    <div class="card-header">Add new role:</div>
+    <div class="card-body">
+        <h4>Add new role</h4>
+        <hr>
+        <form [formGroup]="roleForm" (ngSubmit)="onSubmit(f)" #f="ngForm" style="margin-left: 50px;">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label for="roleName">Role type:</label>
+                        <input type="text" class="form-control" id="roleName" formControlName="roleName" style="width: 400px;">
+                        <div class="alert alert-danger mt-2" style="width: 400px;" *ngIf="roleForm.get('roleName')?.invalid && (roleForm.get('roleName')?.dirty || roleForm.get('roleName')?.touched || f.submitted)">
+                            Type is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4" style="margin-left: 150px;">
+                    <div class="form-group">
+                        <label for="roleDescription">Role description:</label>
+                        <input type="text" class="form-control" id="roleDescription" formControlName="roleDescription" style="width: 400px;">
+                        <div class="alert alert-danger mt-2" style="width: 400px;" *ngIf="roleForm.get('roleDescription')?.invalid && (roleForm.get('roleDescription')?.dirty || roleForm.get('roleDescription')?.touched || f.submitted)">
+                            Description is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-danger float-right">Create role</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Role type</th>
+                    <th>Role description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let role of role">
+                    <td>{{ role.roleName }}</td>
+                    <td>{{ role.roleDescription }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

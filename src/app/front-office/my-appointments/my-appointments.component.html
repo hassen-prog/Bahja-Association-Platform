@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>My Appointments</h2>
+    <button class="btn btn-secondary" (click)="loadMyAppointments()">Refresh My Appointments</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of myAppointments; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ appointment.dateTime | date: 'medium' }}</td>
+          <td>{{ appointment.status }}</td>
+          <td>{{ appointment.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

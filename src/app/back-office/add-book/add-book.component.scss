@@ -1,0 +1,23 @@
+.mat-form-field {
+    width: 100%; /* Full width form fields */
+    margin-bottom: 16px; /* Spacing between fields */
+  }
+  
+  .container {
+    padding: 20px; /* Padding around the form */
+  }
+  
+  mat-card {
+    max-width: 600px; /* Maximum width of the form */
+    margin: auto; /* Center the card in a page */
+  }
+  .book-form {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .alert-success {
+    color: green;
+    font-size: 16px;
+    margin-top: 20px;
+  }

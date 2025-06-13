@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="pageContent">
+  <div class="left-column">
+    <!-- Book Details -->
+    <mat-card class="book-detail-card">
+      <img
+        mat-card-image
+        class="cover"
+        [src]="book.coverImageUrl"
+        alt="{{ book.title }}"
+      />
+      <mat-card-title>Title : {{ book.title }}</mat-card-title>
+      <mat-card-subtitle>Author : {{ book.author }}</mat-card-subtitle>
+      <mat-card-content>
+        <p>Description : {{ book.description }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Recommendation Carousel -->
+    <div class="recommendations" *ngIf="recommendedBooks.length > 0">
+      <h3>More by {{ book.author }}</h3>
+      <div class="carousel">
+        <div class="recommended-book" *ngFor="let rec of recommendedBooks">
+          <a
+            [routerLink]="['/front/dashboardF/bookDetail', rec.id]"
+            style="text-decoration: none; color: inherit"
+          >
+            <img [src]="rec.coverImageUrl" alt="{{ rec.title }}"
+          /></a>
+          <p>{{ rec.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-book-reader
+    *ngIf="book?.pdfUrl"
+    [pdfUrl]="book.pdfUrl"
+    class="bookReader"
+  ></app-book-reader>
+</div>

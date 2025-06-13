@@ -1,0 +1,43 @@
+
+
+<div class="card">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef>Username</th>
+            <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="userFirstName">
+            <th mat-header-cell *matHeaderCellDef>First Name</th>
+            <td mat-cell *matCellDef="let user">{{ user.userFirstName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="userLastName">
+            <th mat-header-cell *matHeaderCellDef>Last Name</th>
+            <td mat-cell *matCellDef="let user">{{ user.userLastName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="userEmail">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let user">{{ user.userEmail }}</td>
+        </ng-container>
+         <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef>phoneNumber</th>
+            <td mat-cell *matCellDef="let user">{{ user.phoneNumber }}</td>
+        </ng-container> 
+        <ng-container matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef>location</th>
+            <td mat-cell *matCellDef="let user">{{ user.location }}</td>
+        </ng-container>
+        <ng-container matColumnDef="birthDate">
+            <th mat-header-cell *matHeaderCellDef>Birth Date</th>
+            <td mat-cell *matCellDef="let user">{{ user.birthDate }}</td>
+        </ng-container>
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <td mat-cell *matCellDef="let user">{{ getRolesDisplay(user) }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    </table>
+</div>

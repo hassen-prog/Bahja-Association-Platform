@@ -1,0 +1,53 @@
+
+
+
+
+
+  <div class="row">
+   
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Add a New Video</h1>
+            </div>
+            <form class="user" (submit)="addVideo($event)">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="videoTitle" name="title" placeholder="Enter Video Title..." required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="videoId" name="videoId" placeholder="YouTube Video ID..." required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-user btn-block">
+                    Add Video
+                </button>
+                <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+            </form>
+  
+</div>
+
+
+
+<div class="container mt-3">
+  <div class="list-group">
+    <a *ngFor="let video of videos" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ video.title }}</h5>
+        <div>
+          <!-- Add button to trigger update modal or form -->
+          <button class="btn btn-primary btn-sm" (click)="editVideo(video)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteVideo(video.id)">Delete</button>
+
+        </div>
+      </div>
+      <p class="mb-1">Some description or preview information here.</p>
+      <small>More details about the video.</small>
+      <div *ngIf="editingVideo && editingVideo.id === video.id">
+        <input [(ngModel)]="editingVideo.title" name="title" placeholder="Title">
+        <input [(ngModel)]="editingVideo.videoId" name="videoId" placeholder="Video ID">
+        <button class="btn btn-success btn-sm" (click)="updateVideo()">Save</button>
+        <button class="btn btn-secondary btn-sm" (click)="editingVideo = null">Cancel</button>
+      </div>
+    </a>
+    
+  </div>
+</div>

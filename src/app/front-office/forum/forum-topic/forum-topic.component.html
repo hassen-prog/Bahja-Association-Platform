@@ -1,0 +1,162 @@
+
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex justify-content-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">bahjaassociation.com</a>
+      <i class="bi bi-phone"></i>+216 99 789 140 <i class="bi bi-telephone"></i> 73 219 502 / 73 200 669
+    </div>
+    <div class="d-none d-lg-flex social-links align-items-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</div>
+
+
+
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+
+    <h1  class="logo me-auto"><a href="#">Bahja - Parental space</a></h1>
+
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+      
+
+        <li><a  class="nav-link scrollto" [routerLink]="'/front/dashboardF/parent'"
+            routerLinkActive="active">Home</a></li>
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/courses'"
+            routerLinkActive="active">Courses</a></li>
+
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/books'"
+            routerLinkActive="active">Resources</a></li>
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/videos'" routerLinkActive="active">Kid's
+            corner</a></li>
+        <li><a  class="nav-link scrollto" [routerLink]="'/front/dashboardF/chat'"
+            routerLinkActive="active">Chat with Admin</a></li>
+        <li class="nav-item">
+          <a class="nav-link"  [routerLink]="['/front/dashboardF/forum']" routerLinkActive="active">Parent Forum</a>
+        </li>
+        <li>
+        <li class="dropdown"><a><span>Settings</span> <i class="bi bi-gear"></i></a>
+          <ul>
+
+
+            <li><a [routerLink]="'/front/dashboardF/profile'" routerLinkActive="active"><i
+                  class="bi bi-person-circle">Profile</i></a></li>
+            <li>
+              <a ><i class="bi bi-box-arrow-right">Sign Out</i></a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    <a  [routerLink]="'/front/dashboardF/newapp'" class="appointment-btn scrollto"><span
+        class="d-none d-md-inline">Make an</span> Appointment</a>
+
+  </div>
+</header>
+
+
+<div class="topic-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <p>Loading content...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="topic && !loading" class="topic-header">
+    <div class="topic-header-content">
+      <h2>{{ topic.name }}</h2>
+      <p class="topic-description">{{ topic.description }}</p>
+      <p class="topic-meta">Created by: {{ topic.creator?.userFirstName }} {{ topic.creator?.userLastName }}</p>
+      <div *ngIf="topic.fileUrl" class="topic-attachment">
+        <a [href]="getSafeFileUrl(topic.fileUrl)" target="_blank" class="attachment-link" download>
+          <mat-icon>attachment</mat-icon> {{ getFileNameFromUrl(topic.fileUrl) }}
+        </a>
+        
+        <div class="file-preview-container">
+          <h4 class="preview-title">File Preview</h4>
+          
+          <!-- Image preview -->
+          <div *ngIf="isImageFile(topic.fileUrl)" class="image-preview">
+            <img [src]="getSafeFileUrl(topic.fileUrl)" alt="File preview" />
+          </div>
+          
+          <!-- PDF preview -->
+          <div *ngIf="isPdfFile(topic.fileUrl)" class="pdf-preview">
+            <iframe [src]="getSafeFileUrl(topic.fileUrl)" width="100%" height="500px" frameborder="0"></iframe>
+          </div>
+          
+          <!-- Text preview -->
+          <div *ngIf="isTextFile(topic.fileUrl)" class="text-preview">
+            <div class="text-content" [innerHtml]="fileTextContent"></div>
+          </div>
+          
+          <!-- Fallback preview -->
+          <div *ngIf="!isImageFile(topic.fileUrl) && !isPdfFile(topic.fileUrl) && !isTextFile(topic.fileUrl)" class="unsupported-preview">
+            <p>Preview not available for this file type. Please download to view.</p>
+            <a mat-raised-button color="primary" [href]="getSafeFileUrl(topic.fileUrl)" download>
+              <mat-icon>download</mat-icon> Download
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="topic-header-actions">
+      <button *ngIf="canCreatePost()" mat-raised-button color="primary" (click)="navigateToCreatePost()">
+        <mat-icon>post_add</mat-icon> New Post
+      </button>
+      <button mat-button (click)="navigateToTopics()">
+        <mat-icon>arrow_back</mat-icon> Back to Topics
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && posts.length === 0" class="no-posts">
+    <p>No posts in this topic yet. Be the first to create one!</p>
+  </div>
+
+  <div class="posts-list" *ngIf="!loading && !error && posts.length > 0">
+    <mat-card *ngFor="let post of posts" class="post-card" (click)="navigateToPost(post.id!)">
+      <mat-card-header>
+        <mat-card-title>{{ post.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Posted by: {{ post.author?.userFirstName }} {{ post.author?.userLastName }}
+          on {{ post.createdAt | date:'medium' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">
+          <mat-icon>chat</mat-icon> 
+          {{ post.comments?.length || 0 }} Comments
+        </button>
+        <button mat-button color="accent">
+          <mat-icon>thumb_up</mat-icon> 
+          {{ post.likes?.length || 0 }} Likes
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="pagination-controls" *ngIf="totalPages > 1">
+    <button mat-button [disabled]="currentPage === 0" (click)="previousPage()">
+      <mat-icon>navigate_before</mat-icon> Previous
+    </button>
+    <span class="page-info">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button mat-button [disabled]="currentPage === totalPages - 1" (click)="nextPage()">
+      Next <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div> 

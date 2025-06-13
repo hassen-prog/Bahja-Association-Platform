@@ -1,0 +1,129 @@
+
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex justify-content-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">bahjaassociation.com</a>
+      <i class="bi bi-phone"></i>+216 99 789 140 <i class="bi bi-telephone"></i> 73 219 502 / 73 200 669
+    </div>
+    <div class="d-none d-lg-flex social-links align-items-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</div>
+
+
+
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+
+    <h1  class="logo me-auto"><a href="#">Bahja - Parental space</a></h1>
+
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+      
+
+        <li><a  class="nav-link scrollto" [routerLink]="'/front/dashboardF/parent'"
+            routerLinkActive="active">Home</a></li>
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/courses'"
+            routerLinkActive="active">Courses</a></li>
+
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/books'"
+            routerLinkActive="active">Resources</a></li>
+        <li><a class="nav-link scrollto" [routerLink]="'/front/dashboardF/videos'" routerLinkActive="active">Kid's
+            corner</a></li>
+        <li><a  class="nav-link scrollto" [routerLink]="'/front/dashboardF/chat'"
+            routerLinkActive="active">Chat with Admin</a></li>
+        <li class="nav-item">
+          <a class="nav-link"  [routerLink]="['/front/dashboardF/forum']" routerLinkActive="active">Parent Forum</a>
+        </li>
+        <li>
+        <li class="dropdown"><a><span>Settings</span> <i class="bi bi-gear"></i></a>
+          <ul>
+
+
+            <li><a [routerLink]="'/front/dashboardF/profile'" routerLinkActive="active"><i
+                  class="bi bi-person-circle">Profile</i></a></li>
+            <li>
+              <a ><i class="bi bi-box-arrow-right">Sign Out</i></a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    <a  [routerLink]="'/front/dashboardF/newapp'" class="appointment-btn scrollto"><span
+        class="d-none d-md-inline">Make an</span> Appointment</a>
+
+  </div>
+</header>
+
+
+
+
+<div class="search-container">
+  <div class="search-header">
+    <div class="search-input-container">
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Search posts (minimum 3 characters)..." 
+        [formControl]="searchControl"
+      >
+      <button 
+        *ngIf="searchControl.value" 
+        class="clear-button" 
+        (click)="clearSearch()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="searching" class="loading-message">
+    <p>Searching...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!searching && searchQuery && posts.length === 0" class="no-results">
+    <p>No posts found matching "{{ searchQuery }}"</p>
+  </div>
+
+  <div *ngIf="searchQuery && posts.length > 0" class="results-info">
+    <p>Showing results for "{{ searchQuery }}"</p>
+  </div>
+
+  <div class="search-results" *ngIf="!searching && posts.length > 0">
+    <mat-card *ngFor="let post of posts" class="post-card" (click)="navigateToPost(post.id!)">
+      <mat-card-header>
+        <mat-card-title>{{ post.title }}</mat-card-title>
+        <mat-card-subtitle>
+          Posted by: {{ post.author?.userFirstName }} {{ post.author?.userLastName }}
+          on {{ post.createdAt | date:'medium' }}
+          in {{ post.topic?.name }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ post.content | slice:0:150 }}{{ post.content.length > 150 ? '...' : '' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="pagination-controls" *ngIf="totalPages > 1">
+    <button mat-button [disabled]="currentPage === 0" (click)="previousPage()">
+      <mat-icon>navigate_before</mat-icon> Previous
+    </button>
+    <span class="page-info">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button mat-button [disabled]="currentPage === totalPages - 1" (click)="nextPage()">
+      Next <mat-icon>navigate_next</mat-icon>
+    </button>
+  </div>
+</div> 

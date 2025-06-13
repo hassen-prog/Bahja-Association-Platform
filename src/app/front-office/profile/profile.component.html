@@ -1,0 +1,70 @@
+
+
+<app-navbar></app-navbar>
+
+<section id="user-profile" class="user-profile">
+    <div class="container">
+        <div class="section-title">
+            <h2>User Profile</h2>
+            <p>Manage your profile details below. Ensure your information is up to date.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="pic"> <img src="../../../assets/img/avatarpr.png" class="img-fluid"
+                            alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ user.userFirstName }} {{ user.userLastName }}</h4>
+                        <p class="card-text">{{user.role[0].roleName}}</p>
+
+                        <button class="btn btn-primary" (click)="toggleEditMode()" *ngIf="!isEditingProfile">Edit
+                            Profile</button>
+
+                        <div class="mt-4" *ngIf="isEditingProfile">
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="firstName"
+                                        [(ngModel)]="tempUser.userFirstName" name="userFirstName"
+                                        placeholder="First Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="lastName"
+                                        [(ngModel)]="tempUser.userLastName" name="userLastName" placeholder="Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" [(ngModel)]="tempUser.userEmail"
+                                        name="userEmail" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="phoneNumber"
+                                        [(ngModel)]="tempUser.phoneNumber" name="phoneNumber"
+                                        placeholder="Phone Number">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="location"
+                                        [(ngModel)]="tempUser.location" name="location" placeholder="Location">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" id="birthDate"
+                                        [(ngModel)]="tempUser.birthDate" name="birthDate" placeholder="Birth Date">
+                                </div>
+                                <button type="button" class="btn btn-success" (click)="saveUserProfile()">Save
+                                    Changes</button>
+                                <button type="button" class="btn btn-secondary"
+                                    (click)="toggleEditMode()">Cancel</button>
+                            </form>
+
+                        </div>
+                        <div *ngIf="showMessage" class="alert alert-success">
+                            {{ messageText }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

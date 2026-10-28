@@ -1,0 +1,58 @@
+<app-navbar></app-navbar>
+<div class="pageContent">
+  <div class="carousel">
+    <ng-container *ngFor="let svg of svgList" class="pagesList">
+      <div class="pageCard">
+        <img
+          mat-card-image
+          alt="SVG preview"
+          class="d-block w-100"
+          loading="lazy"
+          [src]="svg"
+        />
+        <button class="readButton" (click)="selectSvg(svg)">color</button>
+      </div>
+    </ng-container>
+  </div>
+  <div class="coloringSide">
+    <div class="color-palette">
+      <div class="paletteContainer">
+        <div
+          *ngFor="let color of palette"
+          class="color"
+          [style.background]="color"
+          (click)="selectColor(color)"
+          [class.selected]="color === selectedColor"
+        ></div>
+      </div>
+      <div class="paletteContainer">
+        <div
+          *ngFor="let color of palette2"
+          class="color"
+          [style.background]="color"
+          (click)="selectColor(color)"
+          [class.selected]="color === selectedColor"
+        ></div>
+      </div>
+    </div>
+    <div class="coloring-container">
+      <div class="history-buttons">
+        <div class="undoRedoContainer">
+          <button (click)="undo()">
+            <svg [cIcon]="icons.cisActionUndo" class="undo-icon"></svg> Undo
+          </button>
+          <button (click)="redo()">
+            Redo <svg [cIcon]="icons.cisActionRedo" class="redo-icon"></svg>
+          </button>
+        </div>
+        <div class="downloadButt">
+          <button (click)="downloadSVG()">
+            <svg [cIcon]="icons.cisCloudDownload" class="undo-icon"></svg>
+            download
+          </button>
+        </div>
+      </div>
+      <div class="svg-wrapper" #svgContainer></div>
+    </div>
+  </div>
+</div>

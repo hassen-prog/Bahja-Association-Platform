@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.stf_parent canvas {
+  box-shadow: 10px 10px 10px 10px !important;
+}
+.forum-content {
+  height: 88.7vh;
+  // background-image: url("assets/img/bg12.jpg");
+  // background-size: cover;
+  // background-position: center;
+   background-image: url("/assets/img/bg12.jpg");
+  background-size: cover; /* or 'contain' if you want the whole image visible */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  // background-color: rgba(255, 255, 255, 0.75);
+  // position: relative;
+}
+.forum-content::before{
+   content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0); // soft overlay
+  z-index: 1;
+  
+}

@@ -1,0 +1,116 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image:  url('../../../assets/img/bahjaback333333.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.custom-button {
+    background-color: #8641d4;
+    /* Add any other styles you need */
+}
+.form-card {
+    // background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    backdrop-filter: blur(3px);
+    border: 3px solid white;
+}
+.logo-container {
+    text-align: center;
+    
+    
+    .logo {
+        width: 150px;
+       height: 170px;
+        display: block;
+        margin: 0 auto;
+    }
+}
+.signup-container {
+    max-width: 1000px;
+    width: 95%;
+    margin: 2rem auto;
+    padding: 0;
+}
+.form-column {
+    flex: 1;
+    min-width: 280px;
+    padding: 1rem;
+    background: rgba(245, 245, 245, 0.3);
+    border-radius: 15px;
+    border: 1px solid white;
+    
+    .section-title {
+        color: #004D40;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e0e0e0;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+}
+.Login-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.Login-footer a{
+color: white;
+font-size: large;
+font-weight: 700;
+}
+.Login-footer a:hover{
+color: #4e73df;
+}
+.rememberMe{
+    color: white;
+}
+.login-btn{
+background-color: #004d40db !important;
+color: white;
+font-size: large !important;
+font-weight: 500;
+}
+.login-btn:hover{
+background-color: #004d40 !important;
+box-shadow: 2px 3px 1px 1px white;
+}
+@media (max-width: 480px) {
+    .signup-container {
+        width: 100%;
+        height: 100%;
+        margin: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .form-card {
+        padding: 1.2rem;
+    }
+}
+@media (max-width: 768px) {
+    .form-card {
+        padding: 1.5rem;
+    }
+    .form-column {
+        min-width: 100%;
+    }
+}
+.btn{
+    background-color: cornflowerblue;
+    color: white;
+    font-size: large !important;
+}

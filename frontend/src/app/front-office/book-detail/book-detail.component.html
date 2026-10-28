@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<div class="pageContent">
+  <div class="left-column">
+    <!-- Book Details -->
+    <mat-card class="book-detail-card">
+      <img
+        mat-card-image
+        class="cover"
+        [src]="book.coverImageUrl"
+        alt="{{ book.title }}"
+      />
+      <mat-card-title class="mat-card-title"
+        >Title : {{ book.title }}</mat-card-title
+      >
+      <mat-card-subtitle class="mat-card-subtitle"
+        >Author : {{ book.author }}</mat-card-subtitle
+      >
+      <mat-card-content class="mat-card-content">
+        <p>Description : {{ book.description }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <c-carousel
+      *ngIf="recommendedBooks.length > 0"
+      class="c-carousel"
+      [interval]="0"
+    >
+      <c-carousel-indicators class="c-carousel-indicators" />
+      <c-carousel-inner>
+        <ng-container
+          *ngFor="let slide of recommendedBooks; trackBy: trackByCoverUrl"
+        >
+          <c-carousel-item class="c-carousel-item">
+            <!-- <a [routerLink]="['/front/dashboardF/bookDetail', slide.id]"> -->
+            <img
+              mat-card-image
+              alt="{{ slide.title }}"
+              class="d-block w-100"
+              loading="lazy"
+              [src]="slide.coverImageUrl"
+            />
+            <!-- </a> -->
+            <c-carousel-caption class="d-none d-md-block">
+              <!-- <h3>{{ slide.author }}</h3> -->
+              <!-- <p>{{ slide.author }}</p> -->
+              <button class="readButton" (click)="goToBookDetail(slide.id)">
+                READ
+              </button>
+            </c-carousel-caption>
+          </c-carousel-item>
+        </ng-container>
+      </c-carousel-inner>
+      <c-carousel-control [routerLink] caption="Previous" direction="prev" />
+      <c-carousel-control [routerLink] caption="Next" direction="next" />
+    </c-carousel>
+  </div>
+
+  <app-book-reader
+    *ngIf="book?.pdfUrl"
+    [attr.key]="bookReaderKey"
+    [pdfUrl]="book.pdfUrl"
+    class="bookReader"
+  ></app-book-reader>
+</div>

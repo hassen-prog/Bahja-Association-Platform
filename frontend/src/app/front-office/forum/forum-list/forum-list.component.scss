@@ -1,0 +1,95 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+}
+.forum-container {
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3px);
+
+border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 24px;
+  width: 1200px;
+  height: 97%;
+  margin: 10px;
+  // background-color: #2222227a;
+  position: relative;
+  z-index: 100;
+  // box-shadow: -2px 2px 16px 7px #000000;
+  border-radius: 25px;
+}
+
+.forum-header {
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 10px;
+  backdrop-filter: blur(1px);
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  p {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+}
+
+.topics-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.topic-card {
+  
+    border: 15px solid #b0c4de9e;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    box-shadow: 7px 7px 5px 4px;
+    transform: translateY(-5px);
+    // box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-content {
+    padding: 16px 16px;
+    max-height: 100px;
+    overflow: hidden;
+  }
+}
+
+.loading-spinner, .error-message, .no-topics {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+.no-topics {
+  color: #666;
+  font-style: italic;
+} 
+.forum-content{
+      height: 88.7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}

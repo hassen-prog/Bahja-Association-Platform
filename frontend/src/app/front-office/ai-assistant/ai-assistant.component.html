@@ -1,0 +1,98 @@
+<!-- <div class="chat-toggle" (click)="toggleChat()">💬</div>
+
+<div class="chat-container" [class.open]="showChat">
+  <div class="chat-header">
+    AI Assistant
+    <button (click)="toggleChat()">×</button>
+  </div>
+
+  <div class="chat-body">
+    <p *ngIf="response">{{ response }}</p>
+  </div>
+
+  <div class="chat-input-container">
+    <input [(ngModel)]="prompt" placeholder="Ask something..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div> -->
+<!-- <div class="chat-toggle" (click)="toggleChat()">💬</div>
+
+<div class="chat-container" [class.open]="showChat">
+  <div class="chat-header">
+    AI Assistant
+    <button (click)="toggleChat()">×</button>
+  </div>
+
+  <div class="chat-body">
+    <div
+      *ngFor="let msg of messages"
+      [ngClass]="{
+        message: true,
+        'user-msg': msg.role === 'user',
+        'ai-msg': msg.role === 'ai'
+      }"
+    >
+      {{ msg.content }}
+    </div>
+  </div>
+
+  <div class="chat-input-container">
+    <input [(ngModel)]="prompt" placeholder="Ask something..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div> -->
+<div class="chat-toggle" (click)="toggleChat()">💬</div>
+
+<div class="chat-container" [class.open]="showChat">
+  <!-- Sidebar for Conversations -->
+  <div class="chat-sidebar">
+    <div class="sidebar-header">
+      Conversations
+      <button class="new-convo-btn" (click)="startNewConversation()">＋</button>
+    </div>
+    <div class="conversation-list">
+      <div
+        *ngFor="let convo of conversations"
+        class="conversation-item"
+        [class.active]="convo.id === conversationId"
+        (click)="loadConversation(convo.id)"
+      >
+        <span>{{ convo.title || "Untitled Conversation" }}</span>
+        <button class="delete-btn" (click)="deleteConversation(convo.id)">
+          <i class="bi bi-x-lg" style="color: black"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Chat Panel -->
+  <div class="chat-main">
+    <div class="chat-header">
+      <input
+        [(ngModel)]="conversationTitle"
+        (blur)="updateConversationTitle()"
+        placeholder="Enter title..."
+        class="title-input"
+      />
+      <button (click)="toggleChat()">×</button>
+    </div>
+
+    <div class="chat-body">
+      <div
+        *ngFor="let msg of messages"
+        [ngClass]="{
+          message: true,
+          'user-msg': msg.role === 'user',
+          'ai-msg': msg.role === 'ai'
+        }"
+      >
+        {{ msg.content }}
+      </div>
+    </div>
+
+    <div class="chat-input-container">
+      <input [(ngModel)]="prompt" placeholder="Ask something..." />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

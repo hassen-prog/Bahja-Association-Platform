@@ -1,0 +1,166 @@
+<app-navbar></app-navbar>
+<!-- Loading State -->
+<div class="course-container" *ngIf="loading">
+  <div class="loading-spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<!-- Error State -->
+<div class="course-container" *ngIf="error && !loading">
+  <div class="error-alert">
+    {{ error }}
+  </div>
+</div>
+
+<!-- Course Content -->
+<div class="course-container" *ngIf="course && !loading">
+  <div class="course-layout">
+    <!-- Sidebar Info -->
+    <div class="course-sidebar">
+      <h2>{{ course.title }}</h2>
+      <p>{{ course.description }}</p>
+
+      <div class="course-details">
+        <p>
+          <strong>Price:</strong>
+          {{ course.free ? "Free" : "$" + course.price }}
+        </p>
+        <p><strong>Duration:</strong> Variable</p>
+        <p><strong>Level:</strong> All Levels</p>
+      </div>
+
+      <div class="debug-section">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="hasAccess"
+            (click)="toggleAccess()"
+          />
+          Override Access (For Testing)
+        </label>
+      </div>
+
+      <!-- Lessons List -->
+      <div *ngIf="hasAccess || course.free" class="lessons-section">
+        <h4>Lessons</h4>
+        <div class="lesson-list">
+          <button
+            class="lesson-item"
+            *ngFor="let lesson of course.lessons"
+            [class.active]="selectedLesson?.id === lesson.id"
+            (click)="selectLesson(lesson)"
+          >
+            {{ lesson.title }}
+            <span class="badge" *ngIf="hasPdf(lesson)">PDF</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Lesson Content -->
+    <div class="course-main">
+      <div
+        *ngIf="selectedLesson && (hasAccess || course.free)"
+        class="lesson-content-wrapper"
+      >
+        <h1>{{ selectedLesson.title }}</h1>
+
+        <div *ngIf="!viewingPdf">
+          <!-- Video -->
+          <div *ngIf="hasVideo(selectedLesson)" class="video-wrapper">
+            <iframe
+              [src]="getVideoEmbedUrl(selectedLesson) | safeUrl"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <!-- HTML Content -->
+          <!-- <div class="lesson-html" [innerHTML]="selectedLesson.content"></div> -->
+
+          <!-- PDF Button -->
+          <button
+            *ngIf="hasPdf(selectedLesson)"
+            class="btn btn-outline-primary pdfButt"
+            (click)="viewPdf(selectedLesson)"
+          >
+            <i class="fas fa-file-pdf me-2"></i>
+            View {{ getPdfName(selectedLesson) }}
+          </button>
+
+          <!-- Presentation Button -->
+          <button
+            *ngIf="hasPresentation(selectedLesson)"
+            class="btn btn-outline-success"
+            (click)="viewPresentation(selectedLesson)"
+          >
+            <i class="fas fa-file-powerpoint me-2"></i>
+            View {{ getPresentationName(selectedLesson) }}
+          </button>
+        </div>
+
+        <!-- PDF Viewer -->
+        <div
+          *ngIf="viewingPdf && viewingPdfLessonId === selectedLesson.id"
+          class="viewer-section"
+        >
+          <div class="viewer-header">
+            <h4>{{ getPdfName(selectedLesson) }}</h4>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              (click)="viewingPdf = false"
+            >
+              <i class="fas fa-times"></i> Close PDF
+            </button>
+          </div>
+          <iframe
+            *ngIf="selectedLesson.pdfUrl"
+            [src]="selectedLesson.pdfUrl | safeUrl"
+            width="100%"
+            height="900px"
+            class="pdf-frame"
+          ></iframe>
+        </div>
+
+        <!-- Presentation Viewer -->
+        <div
+          *ngIf="
+            viewingPresentation &&
+            viewingPresentationLessonId === selectedLesson.id
+          "
+          @slideToggle
+          class="viewer-section"
+          #presentationSection
+        >
+          <div class="viewer-header">
+            <h4>{{ getPresentationName(selectedLesson) }}</h4>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              (click)="viewingPresentation = false"
+            >
+              <i class="fas fa-times"></i> Close Presentation
+            </button>
+          </div>
+          <app-pptx-viewer
+            [presentationUrl]="selectedLesson.presentationUrl"
+            [isBase64]="isBase64Presentation(selectedLesson)"
+            [lessonId]="selectedLesson.id"
+          >
+          </app-pptx-viewer>
+        </div>
+      </div>
+
+      <!-- Restricted Message -->
+      <div class="locked-content" *ngIf="!hasAccess && !course?.free">
+        <i class="fas fa-lock fa-3x text-secondary mb-3"></i>
+        <h3>Premium Content</h3>
+        <p>This content is available to paid subscribers only.</p>
+        <button class="btn btn-primary btn-lg" (click)="purchaseCourse()">
+          Purchase Course
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

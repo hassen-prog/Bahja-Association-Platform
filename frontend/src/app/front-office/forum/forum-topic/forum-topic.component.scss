@@ -1,0 +1,231 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+}
+.topic-container {
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3px);
+  padding: 24px;
+  width: 1200px;
+  height: 97%;
+  margin: 10px;
+  // background-color: #2222227a;
+  position: relative;
+  z-index: 100;
+  // box-shadow: -2px 2px 16px 7px #000000;
+  border-radius: 25px;
+}
+.forum-content{
+  height: 88.7vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topic-header {
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  
+  .topic-header-content {
+    flex: 1;
+    min-width: 300px;
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .topic-description {
+      color: #555;
+      margin-bottom: 12px;
+    }
+    
+    .topic-meta {
+      color: #777;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+  }
+  
+  .topic-header-actions {
+    padding-top: 10px;
+    
+    button {
+      margin-left: 10px;
+      
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-content {
+    padding: 16px 16px;
+  }
+}
+
+.loading-spinner, .error-message, .no-posts {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+}
+
+.error-message {
+  color: #f44336;
+}
+
+.no-posts {
+  color: #666;
+  font-style: italic;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  
+  .page-info {
+    margin: 0 20px;
+    color: #666;
+  }
+}
+
+.topic-attachment {
+  margin-top: 10px;
+
+  .attachment-link {
+    display: inline-flex;
+    align-items: center;
+    color: #3f51b5;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    mat-icon {
+      margin-right: 8px;
+      color: #3f51b5;
+    }
+
+    &:hover {
+      background-color: #e8eaf6;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .file-preview-container {
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 16px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    
+    .preview-title {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #424242;
+      font-size: 16px;
+      font-weight: 500;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+    
+    .image-preview {
+      text-align: center;
+      overflow: auto;
+      max-height: 600px;
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    .pdf-preview {
+      iframe {
+        border: 1px solid #eee;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    .text-preview {
+      max-height: 500px;
+      overflow: auto;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      
+      .text-content {
+        padding: 16px;
+        
+        pre {
+          margin: 0;
+          white-space: pre-wrap;
+          font-family: Consolas, Monaco, 'Andale Mono', monospace;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+      }
+    }
+    
+    .unsupported-preview {
+      text-align: center;
+      padding: 24px;
+      border: 1px dashed #ccc;
+      border-radius: 2px;
+      
+      p {
+        margin-bottom: 16px;
+        color: #666;
+      }
+    }
+  }
+} 

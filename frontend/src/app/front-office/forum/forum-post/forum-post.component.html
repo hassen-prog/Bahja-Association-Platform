@@ -1,0 +1,289 @@
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex justify-content-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope"></i>
+      <a href="mailto:contact@example.com">bahjaassociation.com</a>
+      <i class="bi bi-phone"></i>+216 99 789 140
+      <i class="bi bi-telephone"></i> 73 219 502 / 73 200 669
+    </div>
+    <div class="d-none d-lg-flex social-links align-items-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</div>
+
+<header id="header" class="fixed-top">
+  <div class="container">
+    <h1 class="logo"><a href="#">Bahja - Parental space</a></h1>
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/parent'"
+            routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/courses'"
+            routerLinkActive="active"
+            >Courses</a
+          >
+        </li>
+
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/books'"
+            routerLinkActive="active"
+            >Resources</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/videos'"
+            routerLinkActive="active"
+            >Kid's corner</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/chat'"
+            routerLinkActive="active"
+            >Chat with Admin</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/front/dashboardF/forum']"
+            routerLinkActive="active"
+            >Parent Forum</a
+          >
+        </li>
+        <li></li>
+        <li class="dropdown">
+          <a><span>Settings</span> <i class="bi bi-gear"></i></a>
+          <ul>
+            <li>
+              <a
+                [routerLink]="'/front/dashboardF/profile'"
+                routerLinkActive="active"
+                ><i class="bi bi-person-circle">Profile</i></a
+              >
+            </li>
+            <li>
+              <a><i class="bi bi-box-arrow-right">Sign Out</i></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    <!-- <a
+      [routerLink]="'/front/dashboardF/newapp'"
+      class="appointment-btn scrollto"
+      ><span class="d-none d-md-inline">Make an</span> Appointment</a
+    > -->
+  </div>
+</header>
+<div class="forum-content">
+  <div class="post-container">
+    <div *ngIf="loading" class="loading-spinner">
+      <p>Loading post...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div *ngIf="post && !loading" class="post-content">
+      <div class="post-header">
+        <h2>{{ post.title }}</h2>
+        <p class="post-meta">
+          Posted by: {{ post.author?.userFirstName }}
+          {{ post.author?.userLastName }} in
+          <a [routerLink]="['/front/dashboardF/forum/topic', post.topic?.id]">{{
+            post.topic?.name
+          }}</a>
+          on {{ post.createdAt | date : "medium" }}
+        </p>
+      </div>
+
+      <div class="post-body">
+        <p>{{ post.content }}</p>
+
+        <div *ngIf="post.fileUrl" class="post-attachment">
+          <a
+            [href]="getSafeFileUrl(post.fileUrl)"
+            target="_blank"
+            class="attachment-link"
+            download
+          >
+            <mat-icon>attachment</mat-icon>
+            {{ getFileNameFromUrl(post.fileUrl) }}
+          </a>
+
+          <div class="file-preview-container">
+            <h4 class="preview-title">File Preview</h4>
+
+            <!-- Image preview -->
+            <div *ngIf="isImageFile(post.fileUrl)" class="image-preview">
+              <img [src]="getSafeFileUrl(post.fileUrl)" alt="File preview" />
+            </div>
+
+            <!-- PDF preview -->
+            <div *ngIf="isPdfFile(post.fileUrl)" class="pdf-preview">
+              <iframe
+                [src]="getSafeFileUrl(post.fileUrl)"
+                width="100%"
+                height="500px"
+                frameborder="0"
+              ></iframe>
+            </div>
+
+            <!-- Fallback preview -->
+            <div
+              *ngIf="!isImageFile(post.fileUrl) && !isPdfFile(post.fileUrl)"
+              class="unsupported-preview"
+            >
+              <p>
+                Preview not available for this file type. Please download to
+                view.
+              </p>
+              <a
+                mat-raised-button
+                color="primary"
+                [href]="getSafeFileUrl(post.fileUrl)"
+                download
+              >
+                <mat-icon>download</mat-icon> Download
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-actions">
+        <button
+          mat-button
+          color="accent"
+          (click)="toggleLike()"
+          [disabled]="!authService.isLoggedIn()"
+        >
+          <mat-icon>{{
+            hasUserLiked ? "thumb_up" : "thumb_up_off_alt"
+          }}</mat-icon>
+          {{ likeCount }} {{ likeCount === 1 ? "Like" : "Likes" }}
+        </button>
+        <button
+          mat-button
+          color="primary"
+          (click)="showCommentForm = !showCommentForm"
+        >
+          <mat-icon>comment</mat-icon> Comment
+        </button>
+      </div>
+    </div>
+
+    <div class="comments-section" *ngIf="post && !loading">
+      <h3>Comments ({{ comments.length }})</h3>
+
+      <div *ngIf="showCommentForm" class="comment-form">
+        <mat-form-field appearance="outline" class="full-width commentField">
+          <mat-label>Add a comment</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="newCommentContent"
+            placeholder="Write your comment here..."
+            rows="3"
+          ></textarea>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addComment()"
+          [disabled]="!newCommentContent"
+        >
+          Post Comment
+        </button>
+      </div>
+
+      <div *ngIf="comments.length === 0" class="no-comments">
+        <p>No comments yet. Be the first to comment!</p>
+      </div>
+
+      <div class="comments-list">
+        <div *ngFor="let comment of comments" class="comment">
+          <div class="comment-header">
+            <span class="comment-author"
+              >{{ comment.author?.userFirstName }}
+              {{ comment.author?.userLastName }}</span
+            >
+            <span class="comment-date">{{
+              comment.createdAt | date : "medium"
+            }}</span>
+          </div>
+          <div class="comment-body">
+            <p>{{ comment.content }}</p>
+          </div>
+          <div class="comment-actions">
+            <button mat-button (click)="toggleReplyForm(comment)">Reply</button>
+          </div>
+
+          <div *ngIf="comment.showReplyForm" class="reply-form">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label
+                >Reply to {{ comment.author?.userFirstName }}</mat-label
+              >
+              <textarea
+                matInput
+                [(ngModel)]="comment.replyContent"
+                placeholder="Write your reply here..."
+                rows="2"
+              ></textarea>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addReply(comment)"
+              [disabled]="!comment.replyContent"
+            >
+              Post Reply
+            </button>
+          </div>
+
+          <div
+            *ngIf="comment.replies && comment.replies.length > 0"
+            class="replies"
+          >
+            <div *ngFor="let reply of comment.replies" class="reply">
+              <div class="reply-header">
+                <span class="reply-author"
+                  >{{ reply.author?.userFirstName }}
+                  {{ reply.author?.userLastName }}</span
+                >
+                <span class="reply-date">{{
+                  reply.createdAt | date : "medium"
+                }}</span>
+              </div>
+              <div class="reply-body">
+                <p>{{ reply.content }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

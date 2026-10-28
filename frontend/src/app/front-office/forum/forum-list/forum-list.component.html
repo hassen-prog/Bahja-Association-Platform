@@ -1,0 +1,160 @@
+<div id="topbar" class="d-flex align-items-center fixed-top">
+  <div class="container d-flex justify-content-between">
+    <div class="contact-info d-flex align-items-center">
+      <i class="bi bi-envelope"></i>
+      <a href="mailto:contact@example.com">bahjaassociation.com</a>
+      <i class="bi bi-phone"></i>+216 99 789 140
+      <i class="bi bi-telephone"></i> 73 219 502 / 73 200 669
+    </div>
+    <div class="d-none d-lg-flex social-links align-items-center">
+      <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+      <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</div>
+
+<header id="header" class="fixed-top">
+  <div class="container">
+    <h1 class="logo"><a href="#">Bahja - Parental space</a></h1>
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/parent'"
+            routerLinkActive="active"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/courses'"
+            routerLinkActive="active"
+            >Courses</a
+          >
+        </li>
+
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/books'"
+            routerLinkActive="active"
+            >Resources</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/videos'"
+            routerLinkActive="active"
+            >Kid's corner</a
+          >
+        </li>
+        <li>
+          <a
+            class="nav-link scrollto"
+            [routerLink]="'/front/dashboardF/chat'"
+            routerLinkActive="active"
+            >Chat with Admin</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/front/dashboardF/forum']"
+            routerLinkActive="active"
+            >Parent Forum</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/front/dashboardF/meetings']"
+            routerLinkActive="active"
+            >Meetings</a
+          >
+        </li>
+        <li></li>
+        <li class="dropdown">
+          <a><span>Settings</span> <i class="bi bi-gear"></i></a>
+          <ul>
+            <li>
+              <a
+                [routerLink]="'/front/dashboardF/profile'"
+                routerLinkActive="active"
+                ><i class="bi bi-person-circle">Profile</i></a
+              >
+            </li>
+            <li>
+              <a><i class="bi bi-box-arrow-right">Sign Out</i></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    <!-- <a
+      [routerLink]="'/front/dashboardF/newapp'"
+      class="appointment-btn scrollto"
+      ><span class="d-none d-md-inline">Make an</span> Appointment</a
+    > -->
+  </div>
+</header>
+
+<div class="forum-content">
+  <div class="forum-container">
+    <div class="forum-header">
+      <h2>Parents Forum</h2>
+      <p>Join conversations with other parents and share your experiences</p>
+      <button
+        *ngIf="authService.isLoggedIn()"
+        mat-raised-button
+        color="primary"
+        (click)="navigateToCreateTopic()"
+      >
+        <mat-icon>add</mat-icon> Create New Topic
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-spinner">
+      <p>Loading topics...</p>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div *ngIf="!loading && !error && topics.length === 0" class="no-topics">
+      <p>No forum topics available. Be the first to create one!</p>
+    </div>
+
+    <div class="topics-list" *ngIf="!loading && !error && topics.length > 0">
+      <mat-card
+        *ngFor="let topic of topics"
+        class="topic-card"
+        (click)="navigateToTopic(topic.id!)"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ topic.name }}</mat-card-title>
+          <mat-card-subtitle
+            >Created by: {{ topic.creator?.userFirstName }}
+            {{ topic.creator?.userLastName }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ topic.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">
+            <mat-icon>forum</mat-icon> View Discussions
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

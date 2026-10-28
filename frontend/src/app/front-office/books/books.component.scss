@@ -1,0 +1,36 @@
+.booksPageContent{
+  background-image: url("/assets/img/bgbooks2.jpg");
+  background-size: cover; /* or 'contain' if you want the whole image visible */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keeps image position fixed even on scroll */
+}
+.services .icon-box {
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.2);
+  transition: all 0.3s ease-in-out;
+  border-radius: 5px;
+}
+
+.services .icon-box:hover {
+  transform: scale(1.1);
+}
+
+.services img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.section-title{
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,223 @@
+/* Toggle button (fixed) */
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Chat container with animation */
+.chat-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 600px;
+  height: 500px;
+  background: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1rem;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(145deg, #ffffff 0%, #f2f3f5 100%);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.chat-container.open {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 75%;
+    width: 60%;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Chat header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 0.75rem;
+}
+
+/* Close button in header */
+.chat-header button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.chat-body {
+  height: 100%;
+  overflow-y: auto;
+  font-size: 14px;
+  margin-bottom: 0.75rem;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Input and button container */
+.chat-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input-container input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input-container input:focus {
+  border-color: #007bff;
+}
+
+/* Send button */
+.chat-input-container button {
+  padding: 0.5rem 0.75rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.chat-input-container button:hover {
+  background: #0056b3;
+}
+.message {
+  max-width: 80%;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  word-wrap: break-word;
+}
+
+/* User messages aligned right with blue bubble */
+.user-msg {
+  align-self: flex-end;
+  background: #007bff;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+/* AI messages aligned left with light gray bubble */
+.ai-msg {
+  align-self: flex-start;
+  background: #f1f0f0;
+  color: #333;
+  border-bottom-left-radius: 4px;
+}
+.chat-sidebar {
+  width: 300px;
+  border-right: 1px solid #ccc;
+  padding: 1rem;
+  background: #fafafa;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.conversation-item {
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  transition: background 0.2s;
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conversation-item:hover {
+  background-color: #e2e2e2;
+}
+
+.conversation-item.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #ebebeb;
+  border-radius: 7px;
+}
+
+.title-input {
+  flex: 1;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  outline: none;
+}
+.new-convo-btn {
+  margin-left: 8px;
+  font-size: 16px;
+  padding: 2px 6px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.new-convo-btn:hover {
+  background: #d0d0d0;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.conversation-item:hover .delete-btn {
+  opacity: 1;
+}

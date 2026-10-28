@@ -1,0 +1,206 @@
+.pageContent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+      height: 88.7vh;
+     
+     background-image: url("/assets/img/bgkidscorner.jpg");
+  background-size: contain; /* or 'contain' if you want the whole image visible */
+  // background-position: center center;
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+}
+
+.coloring-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 77vh;
+  width: 79vw;
+  border:30px solid white;
+  margin: 10px;
+    box-shadow: 1px 1px 20px 0px;
+    border-radius: 100px;
+    background-color: #004f8c;
+    background-image: url(http://www.transparenttextures.com/patterns/textured-paper.png);
+
+}
+.carousel{
+      border: 10px solid white;
+    margin-left: 25px;
+    border-radius: 60px 28px 28px 60px;
+    box-shadow: 3px 6px 18px 0px black;
+  overflow: auto;
+  width: 365px;
+  height: 85vh;
+  background-color: #004f8c;
+    background-image: url(http://www.transparenttextures.com/patterns/textured-paper.png);
+ 
+}
+.paletteContainer{
+  display: flex;
+  flex-direction: row;
+  // width: 400px;
+  flex-wrap: wrap;
+}
+.color-palette {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+  width: fit-content;
+
+  .color {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    margin:0.8px;
+
+    &.selected {
+      border: 5px solid white;
+    box-shadow: 0px 1px 6px 5px lightsteelblue;
+    }
+  }
+}
+.svg-wrapper{
+  height: 90%;
+  width:100%;
+}
+.svg-wrapper svg {
+ height: 100% !important;
+ width: 100% !important;
+ 
+}
+.svg-wrapper svg path {
+  pointer-events: all;
+}
+.svg-carousel {
+  width: 120px;
+  overflow-y: auto;
+  max-height: 100vh;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.carousel-item {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.carousel-item:hover {
+  border-color: #000;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+
+.readButton{
+  background-color: rgba(70, 131, 180, 0.71);
+    width: 150px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-bottom: 13px;
+    color: white;
+
+}
+.readButton:hover{
+  background-color: rgba(70, 131, 180, 0.941);
+}
+
+.pagesList{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.coloringSide{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+background: rgba(255, 255, 255, 0.646);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.pageCard{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 6px solid lightsteelblue;
+    border-radius: 15px;
+    box-shadow: -2px 7px 12px 0px;
+    margin: 30px;
+    background-color: white;
+}
+.history-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+  margin: 10px 0;
+
+  button {
+    padding: 5px 12px;
+    background-color: white;
+    color: steelblue;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 200px;
+    &:hover {
+      background-color: #4682b4cc;
+      color: white;
+    }
+  }
+  button.download-icon-wrapper {
+    margin-left: 200px;
+   width: 100px;
+  height: 40px;
+  display: inline-block;
+
+  svg {
+    width: fit-content;
+    height: fit-content;
+  }
+}
+}
+.cis-action-undo{
+  font-size: x-large !important;
+  color: #000;
+
+}
+.undo-icon, .redo-icon {
+ font-size: xx-large;
+  cursor: pointer;
+  // color: steelblue;
+  transition: transform 0.2s ease;
+}
+
+.undo-icon:hover, .redo-icon:hover {
+  transform: scale(1.2);
+}
+
+.undoRedoContainer{
+  display: flex;
+    gap: 20px;
+    height: 40px;
+    margin-left: 40px;
+}
+.downloadButt{
+  margin-right: 40px;
+}

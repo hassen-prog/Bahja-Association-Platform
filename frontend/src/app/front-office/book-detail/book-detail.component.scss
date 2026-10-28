@@ -1,0 +1,184 @@
+.book-detail-card {
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.384);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 7px;
+ width: 350px;
+    height: 469px;
+    justify-content: center;
+    align-items: center;
+
+  }
+//   .booksPageContent{
+//   background-image: url("/assets/img/bgbooks2.jpg");
+//   background-size: cover; /* or 'contain' if you want the whole image visible */
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-attachment: fixed; /* Keeps image position fixed even on scroll */
+// }
+  .pageContent{
+     background-image: url("/assets/img/bgbooks2.jpg");
+  background-size: cover; /* or 'contain' if you want the whole image visible */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+        height: 88.7vh;;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .left-column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+//   .cover {
+//   background: linear-gradient(to right, rgb(60, 13, 20) 3px, rgba(255, 255, 255, 0.5) 5px, rgba(255, 255, 255, 0.25) 7px, rgba(255, 255, 255, 0.25) 10px, transparent 12px, transparent 16px, rgba(255, 255, 255, 0.25) 17px, transparent 22px);
+//   box-shadow: 0 0 5px -1px black, inset -1px 1px 2px rgba(255, 255, 255, 0.5);
+//   border-radius: 10px;
+//   width: 340px;
+//   height: 340px;
+//   padding: 10px;
+// }
+.cover{
+  box-shadow: -4px 7px 20px 0px black, inset -4px 2px 2px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border-left: 5px solid black;
+    width: 300px;
+    height: 340px;
+    padding: 10px;
+    background: skyblue;
+}
+.bookReader{
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.774);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+  flex: 1;
+  border-radius: 50px;
+}
+.recommendations {
+  margin-top: 20px;
+}
+
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.recommended-book {
+  min-width: 100px;
+  flex-shrink: 0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.recommended-book img {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+c-carousel,
+.c-carousel {
+  // display: block;
+  // margin: 2rem auto;
+  border-radius: 10px;
+  height: 350px;
+  width: 350px;
+  
+  // background-color: rgba(0, 0, 0, 0.155);
+  // overflow: hidden;
+}
+
+.c-carousel-item img {
+  height: 350px;
+  width: 350px;
+  background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+  object-fit: contain;
+}
+::ng-deep .carousel-control-prev,
+::ng-deep .carousel-control-next{
+/* From https://css.glass */
+
+}
+::ng-deep .carousel-control-prev-icon,
+::ng-deep .carousel-control-next-icon {
+  border-radius: 5px;
+ background-color:steelblue;
+}
+
+
+// Optional: Change the whole button background on hover
+::ng-deep .carousel-control-prev:hover,
+::ng-deep .carousel-control-next:hover {
+  // background-color: rgba(70, 131, 180, 0.299);
+}
+::ng-deep .carousel-caption h3 {
+  color: #f8d200;       // bright yellow title
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+}
+
+::ng-deep .carousel-caption p {
+  color: #ffffff;       // white author
+  font-style: italic;
+  text-shadow: 1px 1px 2px black;
+}
+::ng-deep .carousel-caption {
+  background: rgba(0, 0, 0, 0.021); /* Slightly darker for contrast */
+  backdrop-filter: blur(1px);     /* Applies the blur */
+  -webkit-backdrop-filter: blur(1px); /* For Safari support */
+  padding: 10px;
+  border-radius: 8px;
+}
+.readButton{
+  background-color: rgba(70, 131, 180, 0.71);
+  width: 100px;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin-bottom: 40px;
+  color: white;
+
+}
+.readButton:hover{
+  background-color: rgba(70, 131, 180, 0.941);
+}
+.c-carousel-indicators{
+  color: black;
+}
+.mat-card-title{
+  color: #f8d200;    
+  font-weight: bold;
+  text-shadow: 1px 1px 2px black;
+  width: 300px;
+  // height: 100px;
+  text-align: center;
+}
+.mat-card-subtitle{
+
+}
+.mat-card-content{
+
+font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.24);
+  text-align: center;
+}

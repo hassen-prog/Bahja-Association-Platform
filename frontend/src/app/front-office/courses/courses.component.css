@@ -1,0 +1,103 @@
+.category-item {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.406);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-item.active {
+  background-color: #06bbcc;
+  color: white;
+}
+
+.category-image {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.category-image img {
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.category-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert {
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.course-title-link {
+  color: #0e1133;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.course-title-link:hover {
+  color: #06bbcc;
+}
+.coursePageContent {
+  /* background-image: url("/assets/img/bgcourses.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: #2986ff69;
+  height: 100%; */
+  background-image: url("/assets/img/bgcourses.jpg");
+  background-size: contain; /* or 'contain' if you want the whole image visible */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Keeps image position fixed even on scroll */
+
+  background-color: rgba(41, 134, 255, 0.41); /* same as #2986ff69 */
+
+  min-height: 100vh; /* ensures it fills at least full screen height */
+  width: 100%;
+  overflow: hidden;
+}
+.categoryHeader {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.coursesHeader {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+}

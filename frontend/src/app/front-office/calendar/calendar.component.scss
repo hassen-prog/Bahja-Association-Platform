@@ -1,0 +1,131 @@
+
+:host ::ng-deep .fc .fc-col-header-cell-cushion {
+  color: steelblue; // Blue headers (Sun, Mon, etc.)
+  font-weight: bold;
+}
+:host ::ng-deep .fc .fc-daygrid-day-number {
+  color: steelblue; // Green numbers for each date
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+:host ::ng-deep .fc .fc-event {
+  background-color: steelblue; // Material Indigo
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+  border: none;
+}
+:host ::ng-deep .fc .fc-event:hover {
+  cursor: pointer;
+}
+:host ::ng-deep .fc .fc-toolbar button {
+  background-color: steelblue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 2px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+:host ::ng-deep .fc .fc-toolbar button:hover {
+  background-color: steelblue;
+}
+
+:host ::ng-deep .fc .fc-toolbar .fc-button-active {
+  background-color: steelblue; /* Active button color */
+}
+:host ::ng-deep .fc-daygrid-day-frame {
+  border-color:  steelblue !important;
+}
+
+:host ::ng-deep .fc-theme-standard td,
+:host ::ng-deep .fc-theme-standard th {
+  border-color:  steelblue !important;
+}
+
+:host ::ng-deep .fc-scrollgrid {
+  border-color:  steelblue !important;
+}
+
+:host ::ng-deep .fc-scrollgrid-section table {
+  border-collapse: collapse !important;
+}
+:host ::ng-deep .fc-list-event:hover {
+  color: steelblue !important;
+  cursor: pointer;
+}
+.pageContent{
+   
+  overflow: hidden;
+      display: flex;
+    justify-content: space-around;
+    align-items: center;
+  height: 88.7vh;
+background-image: url('/assets/img/meeting3.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+}
+.calendarContainer{
+ 
+margin: 100px;
+     padding: 20px;
+    width: 1100px;
+    background: rgb(255 255 255 / 71%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.fc .fc-col-header-cell-cushion {
+  color: #3f51b5; /* Any Material color or custom */
+  font-weight: bold;
+}
+
+.MembersList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+   width:470px;
+  height: 650px;
+   background: rgb(255 255 255 / 71%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+  .event-header {
+    width: 440px !important;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #319bff87;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+
+  .event-header:hover {
+    background-color: #319bff;
+  }
+
+  .event-details {
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #1976d2;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+}
+.listTitle{
+  padding: 10px;
+  color: steelblue;
+}

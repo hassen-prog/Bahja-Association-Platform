@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<!-- <full-calendar
+  [options]="calendarOptions()"
+  style="max-width: 900px; margin: auto"
+></full-calendar> -->
+<!-- <div id="calendar" [ngStyle]="{ position: 'relative' }">
+  <full-calendar [options]="calendarOptions()" />
+</div>
+
+<div
+  *ngIf="showDropdown"
+  [ngStyle]="{
+    position: 'absolute',
+    top: dropdownPosition.y + 'px',
+    left: dropdownPosition.x + 'px',
+    background: 'white',
+    border: '1px solid #ccc',
+    padding: '8px',
+    zIndex: 1000
+  }"
+>
+  <p><strong>Choose an action:</strong></p>
+  <button (click)="chooseAction('join')">Join</button>
+  <button (click)="chooseAction('interested')">Interested</button>
+</div> -->
+<div id="calendar" class="pageContent">
+  <div class="calendarContainer">
+    <full-calendar
+      [options]="calendarOptions()"
+      style="
+        max-width: 990px;
+        max-height: 700px;
+        margin: auto;
+        color: steelblue;
+      "
+    />
+  </div>
+  <div class="MembersList">
+    <div class="listTitle">
+      <h1>Joining Members</h1>
+    </div>
+    <div *ngFor="let event of calendarEvents; let i = index">
+      <div (click)="toggleEventDetails(i)" class="event-header">
+        <strong>{{ event.title }}</strong> - {{ event.date | date : "medium" }}
+      </div>
+
+      <div
+        *ngIf="true"
+        [@expandCollapse]="expandedIndex === i ? 'expanded' : 'collapsed'"
+        class="event-details"
+      >
+        <div>
+          <strong>Joining Members:</strong>
+          <ul>
+            <li *ngFor="let member of event.members">
+              {{ member.userFirstName }} {{ member.userLastName }}
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <strong>Interested Members:</strong>
+          <ul>
+            <li *ngFor="let interested of event.interested">
+              {{ interested.userFirstName }} {{ interested.userLastName }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- <hr /> -->
+    </div>
+  </div>
+</div>
